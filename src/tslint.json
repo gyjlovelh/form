@@ -12,6 +12,7 @@
             "element",
             "hs",
             "kebab-case"
-        ]
+        ],
+        "no-trailing-whitespace": false
     }
 }

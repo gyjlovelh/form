@@ -1,0 +1,12 @@
+<form nz-form [formGroup]="rules">
+
+    <ng-container *ngFor="let rule of model">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6">{{rule.title}}</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input [formControlName]="rule.field">
+            </nz-form-control>
+        </nz-form-item>
+    </ng-container>
+
+</form>
