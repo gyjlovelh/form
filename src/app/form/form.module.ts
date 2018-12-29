@@ -4,12 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FormComponent } from './form.component';
-import { FormItemDirective } from './form-item.directive';
-import { FormItemComponent } from './form-item.component';
+import { FormFooterDirective } from './form-footer.directive';
 
 @NgModule({
     imports: [
         CommonModule,
+    
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
@@ -17,15 +17,12 @@ import { FormItemComponent } from './form-item.component';
     ],
     declarations: [
         FormComponent,
-        FormItemComponent,
-        FormItemDirective
+        FormFooterDirective
     ],
-    entryComponents: [
-        FormItemComponent
-    ],
+    entryComponents: [],
     exports: [
         FormComponent,
-        FormItemDirective
+        FormFooterDirective
     ],
 })
 export class FormModule {

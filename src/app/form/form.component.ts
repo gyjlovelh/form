@@ -1,17 +1,21 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ContentChild, TemplateRef, ViewChild} from '@angular/core';
 import {HsFormGroup} from './hs-form-group';
+import { FormFooterDirective } from './form-footer.directive';
 
 @Component({
     selector: 'hs-form',
     templateUrl: './form.component.html'
 })
 export class FormComponent {
+
     public oriData: any;
 
     private _rules: any;
     @Input() set rules(rules: HsFormGroup) {
         if (rules) {
             this._rules = rules;
+            console.log(this._rules);
+
         }
     }
 
@@ -41,4 +45,9 @@ export class FormComponent {
 
     constructor() {
     }
+
+    /**
+     * 自定义按钮
+     */
+    @ContentChild(FormFooterDirective) footerTemplateRef: TemplateRef<any>;
 }

@@ -6,9 +6,23 @@
                 <ng-template #labelTemplate>{{control.label}}</ng-template>
                 <ng-container *ngTemplateOutlet="control.labelTemplate || labelTemplate; context:{$implicit: control, index: index}"></ng-container>
             </nz-form-label>
-            <nz-form-control [nzSpan]="control.controlWidth" nzHasFeedback>
+            <nz-form-control [nzSpan]="control.controlWidth" [nzHasFeedback]="control.feedback">
                 <ng-container *ngIf="!control.readonly">
-                    <input nz-input [formControlName]="control.field">
+                    <ng-container [ngSwitch]="control.type">
+
+                        <input *ngSwitchCase="'input'" nz-input [formControlName]="control.field">
+
+                        <nz-input-number *ngSwitchCase="'number'" [formControlName]="control.field"></nz-input-number>
+
+                        <ng-template *ngSwitchCase="'dropdown'"></ng-template>
+
+                        <nz-date-picker *ngSwitchCase="'date'" nzShowTime [formControlName]="control.field"></nz-date-picker>
+
+                        <ng-container *ngSwitchCase="'template'">
+                            <ng-container *ngTemplateOutlet="control?.controlTemplate;context: {$implicit: control, index: index}"></ng-container>
+                        </ng-container>
+
+                    </ng-container>
                 </ng-container>
 
                 <nz-form-extra *ngIf="control.extra || control.extraTemplate">
@@ -31,4 +45,13 @@
         </nz-form-item>
     </ng-container>
 
+
+    <nz-form-item>
+        <nz-form-control [nzOffset]="4">
+            <ng-template #defaultFooter>
+                <button nz-button type="submit" [disabled]="!(rules.dirty && rules.valid)">确认</button>
+            </ng-template>
+            <ng-container *ngTemplateOutlet="footerTemplateRef?.template || defaultFooter;context: {$implicit: rules}"></ng-container>
+        </nz-form-control>
+    </nz-form-item>
 </form>

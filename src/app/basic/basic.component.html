@@ -1,6 +1,13 @@
 <div>
 
-    <hs-form [rules]="rules" [data]="data"></hs-form>
+    <hs-form [rules]="rules" [data]="data">
+
+        <!-- <ng-template hsFormFooter let-rules>
+            <button nz-button>确认</button>
+            <button nz-button>重置</button>
+            <button nz-button>取消</button>
+        </ng-template> -->
+    </hs-form>
 
     <ng-template #nameTemplate let-control let-index="index">
         <span>this is nameTemplate {{control.field}} - {{index}}</span>
@@ -8,5 +15,9 @@
 
     <ng-template #ageLabelTemplate>
         <span>年龄--<i nz-icon nz-tooltip nzTitle="how old are you?" type="exclamation-circle" theme="outline"></i></span>
+    </ng-template>
+
+    <ng-template #passwordTemplate let-control>
+        <input nz-input type="password" [name]="control.field" [(ngModel)]="control.value">
     </ng-template>
 </div>

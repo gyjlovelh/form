@@ -1,15 +1,19 @@
-import { FormControl, ValidatorFn } from '@angular/forms';
+import { FormControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { TemplateRef } from '@angular/core';
+
+export type controlType = 'input' | 'number' | 'dropdown' | 'date' | 'textarea' | 'password' | 'template';
 
 export class HsFormControl extends FormControl {
     field: string;
     label: string;
+    type: controlType = 'input';
     labelTemplate: TemplateRef<any>;
     extra: string;
     extraTemplate: TemplateRef<any>;
     readonly: boolean;
     labelWidth = 4;
     controlWidth = 18;
+    feedback = false;
 
     get errorList() {
         const list = [];
@@ -18,6 +22,17 @@ export class HsFormControl extends FormControl {
         });
         return list;
     }
+
+    private _controlTemplate: TemplateRef<any>;
+    set controlTemplate(template: TemplateRef<any>) {
+        this.type = 'template';
+        this._controlTemplate = template;
+    }
+
+    get controlTemplate(): TemplateRef<any> {
+        return this._controlTemplate;
+    }
+
 
     private errorMap = new Map<string, string>();
 
@@ -40,5 +55,7 @@ export class HsFormControl extends FormControl {
     getDefaultErrorMsg() {
         return this.errorMap.get('any');
     }
+
+
 
 }

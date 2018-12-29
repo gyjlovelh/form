@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BasicComponent } from './basic/basic.component';
 import { CommonModule, registerLocaleData } from '@angular/common';
-import { FormModule } from 'src/form/form.module';
+import { FormModule } from './form/form.module';
 import zh from '@angular/common/locales/zh';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 registerLocaleData(zh);
 
@@ -25,6 +26,8 @@ const routes: Routes = [
         CommonModule,
         BrowserModule,
         FormModule,
+        FormsModule,
+        ReactiveFormsModule,
         NgZorroAntdModule,
         RouterModule.forRoot(routes)
     ],

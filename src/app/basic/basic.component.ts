@@ -1,6 +1,6 @@
 import { Component, ViewChild, TemplateRef, AfterViewInit, OnInit } from '@angular/core';
-import { HsFormGroup } from '../../form/hs-form-group';
-import { HsFormControl } from '../../form/hs-form-control';
+import { HsFormGroup } from '../form/hs-form-group';
+import { HsFormControl } from '../form/hs-form-control';
 import { Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -11,11 +11,14 @@ import { Observable } from 'rxjs';
 export class BasicComponent implements OnInit, AfterViewInit {
     @ViewChild('nameTemplate') nameTemplate: TemplateRef<any>;
     @ViewChild('ageLabelTemplate') ageLabelTemplate: TemplateRef<any>;
+    @ViewChild('passwordTemplate') passwordTemplate: TemplateRef<any>;
+
     rules = new HsFormGroup();
 
     data = {
         name: 'guanyj',
-        age: 12
+        age: 12,
+        password: 'abcdefg'
     };
     constructor() {
 
@@ -29,6 +32,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
         this.rules.addControl('repass', this.initRepassControl());
         this.rules.addControl('comp', this.initCompControl());
         this.rules.addControl('address', this.initAddressControl());
+        this.rules.addControl('date', this.initDateControl());
     }
 
     ngAfterViewInit() {
@@ -38,6 +42,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
     initNameControl() {
         const control = new HsFormControl();
         control.label = '姓名';
+        control.type = 'input';
         console.log(this.nameTemplate);
         control.extraTemplate = this.nameTemplate;
         control.labelWidth = 4;
@@ -61,6 +66,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
                 });
             }
         ]);
+        control.feedback = true;
 
         control.setErrorMsg('required', '必填');
         control.setErrorMsg('maxlength', '不能超过12');
@@ -78,6 +84,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
 
     initPasswordControl() {
         const control = new HsFormControl();
+        control.controlTemplate = this.passwordTemplate;
         control.label = '密码';
         control.setValidators([Validators.required]);
         control.valueChanges.subscribe(value => {
@@ -118,6 +125,13 @@ export class BasicComponent implements OnInit, AfterViewInit {
         control.labelWidth = 4;
         control.controlWidth = 10;
         control.label = '地址';
+        return control;
+    }
+
+    initDateControl() {
+        const control = new HsFormControl();
+        control.label = '生日';
+        control.type = 'date';
         return control;
     }
 }
