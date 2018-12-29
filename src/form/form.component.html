@@ -1,11 +1,33 @@
-<form nz-form [formGroup]="rules">
+<form nz-form [formGroup]="rules" [nzLayout]="rules.layout">
 
-    <ng-container *ngFor="let rule of model">
+    <ng-container *ngFor="let control of controls; let index=index">
         <nz-form-item>
-            <nz-form-label [nzSpan]="6">{{rule.title}}</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input nz-input [formControlName]="rule.field">
+            <nz-form-label [nzSpan]="control.labelWidth">
+                <ng-template #labelTemplate>{{control.label}}</ng-template>
+                <ng-container *ngTemplateOutlet="control.labelTemplate || labelTemplate; context:{$implicit: control, index: index}"></ng-container>
+            </nz-form-label>
+            <nz-form-control [nzSpan]="control.controlWidth" nzHasFeedback>
+                <ng-container *ngIf="!control.readonly">
+                    <input nz-input [formControlName]="control.field">
+                </ng-container>
+
+                <nz-form-extra *ngIf="control.extra || control.extraTemplate">
+                    <ng-template #extraText>{{control.extra}}</ng-template>
+                    <ng-container *ngTemplateOutlet="control.extraTemplate || extraText; context:{$implicit: control, index: index}"></ng-container>
+                </nz-form-extra>
+
+                <nz-form-explain *ngIf="control.dirty && control.errors">
+                    <ng-container *ngFor="let error of control.errorList">
+                        <ng-container *ngIf="control.hasError(error)">
+                            {{control.getErrorMsg(error) || control.getDefaultErrorMsg(error)}}
+                        </ng-container>
+                    </ng-container>
+                </nz-form-explain>
+
+                <nz-form-text *ngIf="control.readonly">{{control.value}}</nz-form-text>
+
             </nz-form-control>
+
         </nz-form-item>
     </ng-container>
 

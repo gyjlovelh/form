@@ -192,6 +192,13 @@
     ant-design-palettes "^1.1.3"
     tslib "^1.9.0"
 
+"@ant-design/icons-angular@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/@ant-design/icons-angular/-/icons-angular-2.0.1.tgz#ac1828f408fd513c6261f232f44d7c72cc62fdff"
+  dependencies:
+    ant-design-palettes "^1.1.3"
+    tslib "^1.9.0"
+
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
   resolved "http://registry.npm.taobao.org/@babel/code-frame/download/@babel/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"

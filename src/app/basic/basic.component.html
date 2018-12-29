@@ -1,4 +1,12 @@
 <div>
-    <hs-form [model]="model" [data]="data"></hs-form>
-    
+
+    <hs-form [rules]="rules" [data]="data"></hs-form>
+
+    <ng-template #nameTemplate let-control let-index="index">
+        <span>this is nameTemplate {{control.field}} - {{index}}</span>
+    </ng-template>
+
+    <ng-template #ageLabelTemplate>
+        <span>年龄--<i nz-icon nz-tooltip nzTitle="how old are you?" type="exclamation-circle" theme="outline"></i></span>
+    </ng-template>
 </div>

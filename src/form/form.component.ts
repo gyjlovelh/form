@@ -1,32 +1,26 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { HsFormControl } from './hs-form.control';
+import {Component, Input} from '@angular/core';
+import {HsFormGroup} from './hs-form-group';
 
 @Component({
     selector: 'hs-form',
     templateUrl: './form.component.html'
 })
 export class FormComponent {
-
-    public rules = new FormGroup({});
-
     public oriData: any;
 
-    private _model: any;
-    @Input() set model(value: any) {
-        if (value) {
-            this._model = value;
-            value.forEach(item => {
-                const control = new HsFormControl();
-                control.setValidators(item.validators || []);
-                control.setAsyncValidators(item.asyncValidators || []);
-                this.rules.addControl(item.field, control);
-            });
+    private _rules: any;
+    @Input() set rules(rules: HsFormGroup) {
+        if (rules) {
+            this._rules = rules;
         }
     }
 
-    get model(): any {
-        return this._model;
+    get rules(): HsFormGroup {
+        return this._rules;
+    }
+
+    get controls() {
+        return this.rules.controlArray;
     }
 
     private _data: any;
@@ -45,5 +39,6 @@ export class FormComponent {
         return this._data;
     }
 
-    constructor() {}
+    constructor() {
+    }
 }
