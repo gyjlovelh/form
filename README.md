@@ -1,27 +1,70 @@
-# Form
+```
+npm install @hibiscus/form
+```
+#### 📦 使用
+```typescrip
+import {FormModule} from '@hibiscus/form';  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+@NgModule({
+    imports: [
+        ...
+        FormModule
+    ]
+})
+export class UserModule {}
 
-## Development server
+```
+---
+#### 🎨 概述
+> 基于angular6 和 ng-zorro-antd对表单的二次封装，简化表单配置书写，提供常用的模板和验证规则，目的是减少DOM的重复书写，将以往对Form的dom配置放在ts中完成，增强代码的可读性。
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+> 并且提供HsFormControlTemplate、HsFormLabelTEmplate等指令保证扩展性。
+---
+#### 🔨 API
 
-## Code scaffolding
+- [x] **🆖HsFormComponent**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+参数 | 描述 | 类型 | 默认值
+---|---|---|---
+==[rules]== | form的全部配置 | HsFormGroup | null
+==[data]== | 表单数据 | any | null
 
-## Build
+**🆖HsFormControl**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+> **field**: ==string== 
+- [x] 字段名
+> **label**: ==string==
 
-## Running unit tests
+> **type**: ==controlType== 
+- [x] control模板类型，hs-form提供部分常用模板，配合hsFormControlTemplate传入自定义模板
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+> **extra**: ==string== 
+- [x] 额外信息（简单文本）
 
-## Running end-to-end tests
+> **readonly**: ==boolean== 
+- [x] 当前control是否为只读
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+> **visiable**: ==visiableType== 
+- [x] control的可见的场景，默认在查看和修改模式下都可见
 
-## Further help
+```
+const control = new HsFormControl();
+control.label = '密码';
+control.visiable = 'modify';
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+> **transform**: ==Function== 
+- [x] 当readonly为true时，此函数保证文本的正确显示。
+```
+const control = new HsFormControl();
+control.type = 'date';
+control.transform = date => {
+    return format(date, 'yyyy/MM/dd HH:mm:ss');
+};
+```
+
+
+
+
+
+---

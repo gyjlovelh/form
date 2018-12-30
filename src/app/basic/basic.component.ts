@@ -1,10 +1,10 @@
 /**
  * {{desc}}
  *
- * @Author: guanyj
- * @Email: 18062791691@163.com
- * @Date: 2018-12-29 10:56:49
- * @LastEditTime: 2018-12-30 00:13:43
+ * Author: guanyj
+ * Email: 18062791691@163.com
+ * Date: 2018-12-29 10:56:49
+ * LastEditTime: 2018-12-30 00:13:43
  */
 import { Component, ViewChild, TemplateRef, AfterViewInit, OnInit } from '@angular/core';
 import { HsFormGroup } from '../form/hs-form-group';
