@@ -22,7 +22,7 @@ export class UserModule {}
 ---
 #### 🔨 API
 
-- [x] **🆖HsFormComponent**
+**🆖HsFormComponent**
 
 参数 | 描述 | 类型 | 默认值
 ---|---|---|---
@@ -31,20 +31,20 @@ export class UserModule {}
 
 **🆖HsFormControl**
 
-> **field**: ==string== 
+> **field**: string 
 - [x] 字段名
-> **label**: ==string==
+> **label**: string
 
-> **type**: ==controlType== 
+> **type**: controlType
 - [x] control模板类型，hs-form提供部分常用模板，配合hsFormControlTemplate传入自定义模板
 
-> **extra**: ==string== 
+> **extra**: string
 - [x] 额外信息（简单文本）
 
-> **readonly**: ==boolean== 
+> **readonly**: boolean
 - [x] 当前control是否为只读
 
-> **visiable**: ==visiableType== 
+> **visiable**: visiableType 
 - [x] control的可见的场景，默认在查看和修改模式下都可见
 
 ```
@@ -53,7 +53,7 @@ control.label = '密码';
 control.visiable = 'modify';
 ```
 
-> **transform**: ==Function== 
+> **transform**: Function 
 - [x] 当readonly为true时，此函数保证文本的正确显示。
 ```
 const control = new HsFormControl();
