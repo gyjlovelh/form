@@ -25,9 +25,9 @@ const routes: Routes = [
     imports: [
         CommonModule,
         BrowserModule,
-        FormModule,
         FormsModule,
         ReactiveFormsModule,
+        FormModule,
         NgZorroAntdModule,
         RouterModule.forRoot(routes)
     ],

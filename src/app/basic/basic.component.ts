@@ -1,16 +1,23 @@
+/**
+ * {{desc}}
+ *
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2018-12-29 10:56:49
+ * @LastEditTime: 2018-12-30 00:13:43
+ */
 import { Component, ViewChild, TemplateRef, AfterViewInit, OnInit } from '@angular/core';
 import { HsFormGroup } from '../form/hs-form-group';
 import { HsFormControl } from '../form/hs-form-control';
 import { Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'hs-basic',
     templateUrl: './basic.component.html'
 })
 export class BasicComponent implements OnInit, AfterViewInit {
-    @ViewChild('nameTemplate') nameTemplate: TemplateRef<any>;
-    @ViewChild('ageLabelTemplate') ageLabelTemplate: TemplateRef<any>;
     @ViewChild('passwordTemplate') passwordTemplate: TemplateRef<any>;
 
     rules = new HsFormGroup();
@@ -18,14 +25,36 @@ export class BasicComponent implements OnInit, AfterViewInit {
     data = {
         name: 'guanyj',
         age: 12,
-        password: 'abcdefg'
+        password: 'abcdefg',
+        address: ['sd', 'ns'],
+        date: new Date()
     };
-    constructor() {
+
+    options = [
+        { value: 'sd', label: '湖北',
+            children: [
+                { value: 'ns', label: '荆门', isLeaf: true },
+                { value: 'nr', label: '荆州', isLeaf: true },
+            ]
+        },
+        { value: 'zd', label: '湖南',
+            children: [
+                { value: 'kp', label: '长沙', isLeaf: true },
+                { value: 'yj', label: 'xxx', isLeaf: true },
+            ]
+        },
+    ];
+
+    constructor(
+        private $active: ActivatedRoute
+    ) {
 
     }
 
     ngOnInit() {
-
+        this.$active.queryParams.subscribe(query => {
+            this.rules.readonly = query.type === 'readonly';
+        });
         this.rules.addControl('name', this.initNameControl());
         this.rules.addControl('age', this.initAgeControl());
         this.rules.addControl('password', this.initPasswordControl());
@@ -33,6 +62,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
         this.rules.addControl('comp', this.initCompControl());
         this.rules.addControl('address', this.initAddressControl());
         this.rules.addControl('date', this.initDateControl());
+
     }
 
     ngAfterViewInit() {
@@ -43,8 +73,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
         const control = new HsFormControl();
         control.label = '姓名';
         control.type = 'input';
-        console.log(this.nameTemplate);
-        control.extraTemplate = this.nameTemplate;
+        control.required = true;
         control.labelWidth = 4;
         control.controlWidth = 8;
         control.setValidators([
@@ -76,16 +105,21 @@ export class BasicComponent implements OnInit, AfterViewInit {
 
     initAgeControl() {
         const control = new HsFormControl();
-        control.labelTemplate = this.ageLabelTemplate;
-
+        control.type = 'number';
         control.extra = '范围（0~100）';
+        control.setValidators([
+            Validators.required,
+            Validators.min(0),
+            Validators.max(100)
+        ]);
+        control.setDefaultErrorMsg('填写错误');
         return control;
     }
 
     initPasswordControl() {
         const control = new HsFormControl();
-        control.controlTemplate = this.passwordTemplate;
         control.label = '密码';
+        control.visiable = 'modify';
         control.setValidators([Validators.required]);
         control.valueChanges.subscribe(value => {
             this.rules.get('repass').updateValueAndValidity();
@@ -98,6 +132,7 @@ export class BasicComponent implements OnInit, AfterViewInit {
     initRepassControl() {
         const control = new HsFormControl();
         control.label = '确认密码';
+        control.visiable = 'modify';
         control.setErrorMsg('required', '必填滴');
         control.setErrorMsg('confirm', '要一致');
         control.setValidators([
@@ -132,6 +167,9 @@ export class BasicComponent implements OnInit, AfterViewInit {
         const control = new HsFormControl();
         control.label = '生日';
         control.type = 'date';
+        control.transform = value => {
+            return '123';
+        };
         return control;
     }
 }

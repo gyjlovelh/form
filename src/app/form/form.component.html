@@ -1,13 +1,21 @@
+<!--
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2018-12-29 11:15:51
+ * @LastEditTime: 2018-12-30 13:37:51
+ -->
+
 <form nz-form [formGroup]="rules" [nzLayout]="rules.layout">
 
     <ng-container *ngFor="let control of controls; let index=index">
         <nz-form-item>
-            <nz-form-label [nzSpan]="control.labelWidth">
+            <nz-form-label [nzSpan]="control.labelWidth" [nzRequired]="control.required">
                 <ng-template #labelTemplate>{{control.label}}</ng-template>
                 <ng-container *ngTemplateOutlet="control.labelTemplate || labelTemplate; context:{$implicit: control, index: index}"></ng-container>
             </nz-form-label>
             <nz-form-control [nzSpan]="control.controlWidth" [nzHasFeedback]="control.feedback">
-                <ng-container *ngIf="!control.readonly">
+                <ng-container *ngIf="!(rules.readonly || control.readonly)">
+                    <!-- TODO: 补全 -->
                     <ng-container [ngSwitch]="control.type">
 
                         <input *ngSwitchCase="'input'" nz-input [formControlName]="control.field">
@@ -24,28 +32,29 @@
 
                     </ng-container>
                 </ng-container>
+                <ng-container *ngIf="!(rules.readonly || control.readonly)">
+                    <nz-form-extra *ngIf="control.extra || control.extraTemplate">
+                        <ng-template #extraText>{{control.extra}}</ng-template>
+                        <ng-container *ngTemplateOutlet="control.extraTemplate || extraText; context:{$implicit: control, index: index}"></ng-container>
+                    </nz-form-extra>
 
-                <nz-form-extra *ngIf="control.extra || control.extraTemplate">
-                    <ng-template #extraText>{{control.extra}}</ng-template>
-                    <ng-container *ngTemplateOutlet="control.extraTemplate || extraText; context:{$implicit: control, index: index}"></ng-container>
-                </nz-form-extra>
-
-                <nz-form-explain *ngIf="control.dirty && control.errors">
-                    <ng-container *ngFor="let error of control.errorList">
-                        <ng-container *ngIf="control.hasError(error)">
-                            {{control.getErrorMsg(error) || control.getDefaultErrorMsg(error)}}
+                    <nz-form-explain *ngIf="control.dirty && control.errors">
+                        <ng-container *ngFor="let error of control.errorList">
+                            <ng-container *ngIf="control.hasError(error)">
+                                {{control.getErrorMsg(error) || control.getDefaultErrorMsg()}}
+                            </ng-container>
                         </ng-container>
-                    </ng-container>
-                </nz-form-explain>
+                    </nz-form-explain>
+                </ng-container>
 
-                <nz-form-text *ngIf="control.readonly">{{control.value}}</nz-form-text>
+                <nz-form-text *ngIf="rules.readonly || control.readonly">{{control.transform(control.value)}}</nz-form-text>
 
             </nz-form-control>
 
         </nz-form-item>
     </ng-container>
 
-
+    <!-- TODO: 按钮组 -->
     <nz-form-item>
         <nz-form-control [nzOffset]="4">
             <ng-template #defaultFooter>
