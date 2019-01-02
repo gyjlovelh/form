@@ -1,9 +1,9 @@
 /**
  * {{desc}}
  *
- *  ~Author: guanyj
- *  ~Email: 18062791691@163.com
- *  ~Date: 2018-12-29 11:10:34
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2018-12-29 11:10:34
  */
 
 import {Component, Input, ContentChild, TemplateRef, ViewChild, ContentChildren, QueryList, OnInit, AfterContentInit} from '@angular/core';
@@ -27,8 +27,7 @@ export class FormComponent implements OnInit, AfterContentInit {
     @Input() set rules(rules: HsFormGroup) {
         if (rules) {
             this._rules = rules;
-            console.log(this._rules);
-
+            this.initFormStatus();
         }
     }
 
@@ -48,11 +47,7 @@ export class FormComponent implements OnInit, AfterContentInit {
     @Input() set data(value: any) {
         if (value) {
             this._data = this.oriData = value;
-            Object.keys(value).forEach(key => {
-                if (this.rules.contains(key)) {
-                    this.rules.get(key).setValue(value[key]);
-                }
-            });
+            this.initFormStatus();
         }
     }
 
@@ -91,5 +86,15 @@ export class FormComponent implements OnInit, AfterContentInit {
             const control = <HsFormControl>this.rules.get(directive.field);
             control.extraTemplate = directive.template;
         });
+    }
+
+    private initFormStatus() {
+        if (this.rules && this.data) {
+            Object.keys(this.data).forEach(key => {
+                if (this.rules.contains(key)) {
+                    this.rules.get(key).setValue(this.data[key]);
+                }
+            });
+        }
     }
 }

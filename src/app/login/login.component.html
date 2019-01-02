@@ -1,0 +1,32 @@
+<!--
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2019-01-02 19:43:38
+ * @LastEditTime: 2019-01-02 20:35:05
+ -->
+<div class="page-wrap">
+    <div class="page-content-wrap" style="width: 400px">
+        <hs-form [rules]="rules" [data]="data">
+            <ng-template hsFormControlTemplate field="username" let-control>
+                <nz-input-group [nzPrefix]="prefixTemplate">
+                    <input type="text" nz-input [(ngModel)]="control.value" placeholder="enter Username">
+                </nz-input-group>
+                <ng-template #prefixTemplate><i nz-icon type="question-circle" theme="outline"></i></ng-template>
+            </ng-template>
+
+            <ng-template hsFormControlTemplate field="password" let-control>
+                <nz-input-group [nzPrefix]="prefixLock">
+                    <input type="password" nz-input [(ngModel)]="control.value" placeholder="Password">
+                </nz-input-group>
+                <ng-template #prefixLock><i nz-icon type="question-circle" theme="outline"></i></ng-template>
+            </ng-template>
+
+            <ng-template hsFormFooterTemplate>
+                <label nz-checkbox><span>Remember me</span></label>
+                <a class="forget-pas">Forgot password</a>
+                <button style="width: 100%" nz-button nzType="primary">登录</button>
+            </ng-template>
+        </hs-form>
+
+    </div>
+</div>

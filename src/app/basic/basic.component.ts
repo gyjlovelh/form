@@ -62,7 +62,8 @@ export class BasicComponent implements OnInit, AfterViewInit {
         this.rules.addControl('comp', this.initCompControl());
         this.rules.addControl('address', this.initAddressControl());
         this.rules.addControl('date', this.initDateControl());
-
+        this.rules.labelWidth = 8;
+        this.rules.controlWidth = 16;
     }
 
     ngAfterViewInit() {

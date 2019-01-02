@@ -1,19 +1,21 @@
 /**
  * FormGroup子类，扩展对表单样式、布局等的控制
  *
- *  ~Author: guanyj
- *  ~Email: 18062791691@163.com
- *  ~Date: 2018-12-29 11:15:51
- *  ~LastEditTime: 2018-12-30 14:36:48
- *  ~extends FormGroup
+ * Author: guanyj
+ * Email: 18062791691@163.com
+ * Date: 2018-12-29 11:15:51
+ * LastEditTime: 2018-12-30 14:36:48
+ * extends FormGroup
  */
 
 import {FormGroup} from '@angular/forms';
 import { HsFormControl } from './hs-form-control';
 
+export type layoutType = 'horizontal' | 'vertical' | 'inline';
+
 export class HsFormGroup extends FormGroup {
     /**
-     *  ~readonly
+     * readonly
      */
     controlArray = [];
 
@@ -24,18 +26,22 @@ export class HsFormGroup extends FormGroup {
 
     /**
      * 表单布局
-     *  ~default 'horizontal'
+     * default 'horizontal'
      */
-    layout: 'horizontal' | 'vertical' | 'inline' = 'horizontal';
+    layout: layoutType = 'horizontal';
+
+    labelWidth: number;
+
+    controlWidth: number;
 
     constructor() {
         super({});
     }
 
     /**
-     *  ~override
-     *  ~param name
-     *  ~param control
+     * override
+     * param name
+     * param control
      */
     addControl(name: string, control: HsFormControl): void {
         this.controlArray.push(control);
@@ -44,8 +50,8 @@ export class HsFormGroup extends FormGroup {
     }
 
     /**
-     *  ~override
-     *  ~param name
+     * override
+     * param name
      */
     removeControl(name: string): void {
         this.controlArray = this.controlArray.filter(c => c.field !== name);

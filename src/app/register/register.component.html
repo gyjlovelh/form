@@ -1,0 +1,37 @@
+<!--
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2019-01-02 20:46:28
+ * @LastEditTime: 2019-01-02 21:30:36
+ -->
+<div class="page-wrap">
+    <div class="page-content-wrap">
+        <hs-form [rules]="rules" [data]="data">
+
+
+            <ng-template hsFormLabelTemplate field="nickname">
+                <span>Nickname<i nz-icon nz-tooltip nzTitle="What do you want other to call you" type="question-circle" theme="outline"></i></span>
+            </ng-template>
+
+            <ng-template hsFormControlTemplate field="phone" let-control>
+                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                    <ng-template #addOnBeforeTemplate>
+                        <nz-select [ngModel]="'1'" style="width: 70px;">
+                            <nz-option nzLabel="+86" nzValue="1"></nz-option>
+                            <nz-option nzLabel="+87" nzValue="1"></nz-option>
+                        </nz-select>
+                    </ng-template>
+                    <input nz-input [(ngModel)]="control.value">
+                </nz-input-group>
+                <!-- <span *ngIf="rules.get('phone').dirty">Please input your phone number!</span> -->
+            </ng-template>
+
+            <ng-template hsFormFooterTemplate>
+                <label nz-checkbox>
+                    <span>I have read the <a>agreement</a></span>
+                </label>
+                <p><button nz-button nzType="primary">Register</button></p>
+            </ng-template>
+        </hs-form>
+    </div>
+</div>

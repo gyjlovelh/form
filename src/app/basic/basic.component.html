@@ -2,36 +2,39 @@
  * Author: guanyj
  * Email: 18062791691@163.com
  * Date: 2018-12-29 10:56:49
- * LastEditTime: 2018-12-30 13:19:48
+ * @LastEditTime: 2019-01-02 18:19:56
  -->
 
-<div>
-    <hs-form [rules]="rules" [data]="data">
+<div class="page-wrap">
+    <div class="page-content-wrap">
+        <hs-form [rules]="rules" [data]="data">
 
-        <!-- <ng-template hsFormFooter let-rules>
-            <button nz-button>确认</button>
-            <button nz-button>重置</button>
-            <button nz-button>取消</button>
-        </ng-template> -->
+            <!-- <ng-template hsFormFooter let-rules>
+                        <button nz-button>确认</button>
+                        <button nz-button>重置</button>
+                        <button nz-button>取消</button>
+                    </ng-template> -->
 
-        <ng-template hsFormControlTemplate field="address" let-control>
-            <nz-cascader [nzOptions]="options" [(ngModel)]="control.value">
-            </nz-cascader>
-        </ng-template>
+            <ng-template hsFormControlTemplate field="address" let-control>
+                <nz-cascader [nzOptions]="options" [(ngModel)]="control.value">
+                </nz-cascader>
+            </ng-template>
 
-        <ng-template hsFormExtraTemplate field="name" let-control let-index="index">
-            <span>this is nameTemplate {{control.field}} - {{index}}</span>
-        </ng-template>
+            <ng-template hsFormExtraTemplate field="name" let-control let-index="index">
+                <span>this is nameTemplate {{control.field}} - {{index}}</span>
+            </ng-template>
 
-        <ng-template hsFormLabelTemplate field="age">
-            <span>年龄--<i nz-icon nz-tooltip nzTitle="how old are you?" type="exclamation-circle" theme="outline"></i></span>
-        </ng-template>
+            <ng-template hsFormLabelTemplate field="age">
+                <span>年龄 <i nz-icon nz-tooltip nzTitle="how old are you?" type="exclamation-circle" theme="outline"></i></span>
+            </ng-template>
 
-        <ng-template hsFormControlTemplate field="password" let-control>
-            <input nz-input type="password" [name]="control.field" [(ngModel)]="control.value">
-        </ng-template>
+            <ng-template hsFormControlTemplate field="password" let-control>
+                <input nz-input type="password" [name]="control.field" [(ngModel)]="control.value">
+            </ng-template>
 
 
-    </hs-form>
+        </hs-form>
+
+    </div>
 
 </div>

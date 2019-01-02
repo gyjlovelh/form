@@ -8,6 +8,7 @@
         "package:pathch": "npm version patch && ng-packagr -p ng-package.json && npm publish dist --access publi"
     },
     "private": false,
+    "repository": "https://github.com/gyjlovelh/form",
     "dependencies": {
         "@angular/animations": "^6.1.0",
         "@angular/common": "^6.1.0",

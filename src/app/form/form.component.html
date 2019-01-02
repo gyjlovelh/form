@@ -1,30 +1,36 @@
 <!--
- *  ~Author: guanyj
- *  ~Email: 18062791691@163.com
- *  ~Date: 2018-12-29 11:15:51
- *  ~LastEditTime: 2018-12-30 13:37:51
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2018-12-29 11:15:51
+ * @LastEditTime: 2019-01-02 20:42:37
  -->
 
-<form nz-form [formGroup]="rules" [nzLayout]="rules.layout">
+<form nz-form class="hs-form-warp" [formGroup]="rules" [nzLayout]="rules.layout">
 
     <ng-container *ngFor="let control of controls; let index=index">
         <nz-form-item>
-            <nz-form-label [nzSpan]="control.labelWidth" [nzRequired]="control.required">
+            <nz-form-label [nzSpan]="(control.labelWidth || rules.labelWidth) | layout:rules.layout" [nzRequired]="control.required">
                 <ng-template #labelTemplate>{{control.label}}</ng-template>
                 <ng-container *ngTemplateOutlet="control.labelTemplate || labelTemplate; context:{$implicit: control, index: index}"></ng-container>
             </nz-form-label>
-            <nz-form-control [nzSpan]="control.controlWidth" [nzHasFeedback]="control.feedback">
+            <nz-form-control [nzSpan]="(control.controlWidth || rules.controlWidth) | layout:rules.layout" [nzHasFeedback]="control.feedback">
                 <ng-container *ngIf="!(rules.readonly || control.readonly)">
                     <!-- TODO: 补全 -->
                     <ng-container [ngSwitch]="control.type">
 
-                        <input *ngSwitchCase="'input'" nz-input [formControlName]="control.field">
+                        <input *ngSwitchCase="'input'" nz-input
+                            class="hs-form-item"
+                            [formControlName]="control.field"
+                            [placeholder]="control.placeholder">
 
-                        <nz-input-number *ngSwitchCase="'number'" [formControlName]="control.field"></nz-input-number>
+                        <nz-input-number *ngSwitchCase="'number'"
+                            class="hs-form-item"
+                            [formControlName]="control.field">
+                        </nz-input-number>
 
-                        <ng-template *ngSwitchCase="'dropdown'"></ng-template>
+                        <ng-template class="hs-form-item" *ngSwitchCase="'dropdown'"></ng-template>
 
-                        <nz-date-picker *ngSwitchCase="'date'" nzShowTime [formControlName]="control.field"></nz-date-picker>
+                        <nz-date-picker class="hs-form-item" *ngSwitchCase="'date'" nzShowTime [formControlName]="control.field"></nz-date-picker>
 
                         <ng-container *ngSwitchCase="'template'">
                             <ng-container *ngTemplateOutlet="control?.controlTemplate;context: {$implicit: control, index: index}"></ng-container>
@@ -56,7 +62,7 @@
 
     <!-- TODO: 按钮组 -->
     <nz-form-item>
-        <nz-form-control [nzOffset]="4">
+        <nz-form-control [nzOffset]="rules.labelWidth | layout:rules.layout">
             <ng-template #defaultFooter>
                 <button nz-button type="submit" [disabled]="!(rules.dirty && rules.valid)">确认</button>
             </ng-template>
