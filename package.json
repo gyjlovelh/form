@@ -5,7 +5,7 @@
         "ng": "ng",
         "start": "ng serve",
         "package": "ng-packagr -p ng-package.json && npm publish dist --access public",
-        "package:pathch": "npm version patch && ng-packagr -p ng-package.json && npm publish dist --access publi"
+        "package:patch": "npm version patch && ng-packagr -p ng-package.json && npm publish dist --access publi"
     },
     "private": false,
     "repository": "https://github.com/gyjlovelh/form",
