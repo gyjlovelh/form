@@ -6,19 +6,35 @@
  * @Date: 2018-12-29 11:10:34
  */
 
-import {Component, Input, ContentChild, TemplateRef, ViewChild, ContentChildren, QueryList, OnInit, AfterContentInit} from '@angular/core';
-import {HsFormGroup} from './hs-form-group';
+import { Component, Input, ContentChild, ContentChildren, QueryList, OnInit, AfterContentInit } from '@angular/core';
+import { HsFormGroup } from './hs-form-group';
 import { FormFooterTemplateDirective } from './form-footer-template.directive';
 import { FormControlTemplateDirective } from './form-control-template.directive';
 import { HsFormControl } from './hs-form-control';
 import { FormLabelTemplateDirective } from './form-label-template.directive';
 import { FormExtraTemplateDirective } from './form-extra-template.directive';
+import { FormExplainTemplateDirective } from './form-explain-template.directive';
 
 @Component({
     selector: 'hs-form',
-    templateUrl: './form.component.html'
+    templateUrl: './form.component.html',
+    queries: {
+        footerTemplateRef: new ContentChild(FormFooterTemplateDirective),
+        controlTemplateRefs: new ContentChildren(FormControlTemplateDirective),
+        labelTemplateRefs: new ContentChildren(FormLabelTemplateDirective),
+        extraTemplateRefs: new ContentChildren(FormExtraTemplateDirective),
+        explainTemplateRefs: new ContentChildren(FormExplainTemplateDirective)
+    }
 })
 export class FormComponent implements OnInit, AfterContentInit {
+    /**
+     * 自定义按钮
+     */
+    footerTemplateRef: QueryList<FormFooterTemplateDirective>;
+    controlTemplateRefs: QueryList<FormControlTemplateDirective>;
+    labelTemplateRefs: QueryList<FormLabelTemplateDirective>;
+    extraTemplateRefs: QueryList<FormExtraTemplateDirective>;
+    explainTemplateRefs: QueryList<FormExplainTemplateDirective>;
 
     public oriData: any;
 
@@ -58,14 +74,6 @@ export class FormComponent implements OnInit, AfterContentInit {
     constructor() {
     }
 
-    /**
-     * 自定义按钮
-     */
-    @ContentChild(FormFooterTemplateDirective) footerTemplateRef: FormFooterTemplateDirective;
-    @ContentChildren(FormControlTemplateDirective) controlTemplateRefs: QueryList<FormControlTemplateDirective>;
-    @ContentChildren(FormLabelTemplateDirective) labelTemplateRefs: QueryList<FormLabelTemplateDirective>;
-    @ContentChildren(FormExtraTemplateDirective) extraTemplateRefs: QueryList<FormExtraTemplateDirective>;
-
     ngOnInit() {
 
     }
@@ -85,6 +93,11 @@ export class FormComponent implements OnInit, AfterContentInit {
         this.extraTemplateRefs.forEach(directive => {
             const control = <HsFormControl>this.rules.get(directive.field);
             control.extraTemplate = directive.template;
+        });
+
+        this.explainTemplateRefs.forEach(directive => {
+            const control = <HsFormControl>this.rules.get(directive.field);
+            control.explainTemplate = directive.template;
         });
     }
 

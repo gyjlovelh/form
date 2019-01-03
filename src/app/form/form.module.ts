@@ -17,6 +17,7 @@ import { FormControlTemplateDirective } from './form-control-template.directive'
 import { FormLabelTemplateDirective } from './form-label-template.directive';
 import { FormExtraTemplateDirective } from './form-extra-template.directive';
 import { LayoutPipe } from './layout.pipe';
+import { FormExplainTemplateDirective } from './form-explain-template.directive';
 @NgModule({
     imports: [
         CommonModule,
@@ -31,6 +32,7 @@ import { LayoutPipe } from './layout.pipe';
         FormControlTemplateDirective,
         FormLabelTemplateDirective,
         FormExtraTemplateDirective,
+        FormExplainTemplateDirective,
         LayoutPipe
     ],
     entryComponents: [],
@@ -39,7 +41,8 @@ import { LayoutPipe } from './layout.pipe';
         FormFooterTemplateDirective,
         FormControlTemplateDirective,
         FormLabelTemplateDirective,
-        FormExtraTemplateDirective
+        FormExtraTemplateDirective,
+        FormExplainTemplateDirective
     ],
 })
 export class FormModule {

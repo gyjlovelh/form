@@ -128,6 +128,7 @@ export class HsFormControl extends FormControl {
      */
     extraTemplate: TemplateRef<any>;
     labelTemplate: TemplateRef<any>;
+    explainTemplate: TemplateRef<any>;
     private _controlTemplate: TemplateRef<any>;
 
     set controlTemplate(template: TemplateRef<any>) {

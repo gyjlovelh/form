@@ -22,4 +22,8 @@ export class RegisterComponent implements OnInit {
         this.rules = this.$formService.initFormRules();
     }
 
+    handleRegister() {
+        console.log(this.rules);
+    }
+
 }

@@ -61,10 +61,12 @@ export class RegisterService {
     }
 
     private initPhoneControl() {
+        // TODO: 自定义错误提示
         const control = new HsFormControl();
         control.label = 'Phone Number';
         control.required = true;
         control.setValidators([Validators.required]);
+        control.setErrorMsg('required', 'Please input your phone number!');
         return control;
     }
 

@@ -9,7 +9,8 @@
 import { Directive, TemplateRef, Input, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[hsFormControlTemplate]'
+    selector: '[hsFormControlTemplate]',
+    exportAs: 'cont'
 })
 export class FormControlTemplateDirective {
     @Input() field: string;

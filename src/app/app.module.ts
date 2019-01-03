@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { RegisterComponent } from './register/register.component';
+import { DynamicComponent } from './dynamic/dynamic.component';
 
 const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
 
@@ -24,7 +25,8 @@ const routes: Routes = [
     { path: 'basic', component: BasicComponent },
     { path: 'layout', component: LayoutComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent }
+    { path: 'register', component: RegisterComponent },
+    { path: 'dynamic', component: DynamicComponent }
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const routes: Routes = [
         BasicComponent,
         LayoutComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        DynamicComponent
     ],
     imports: [
         CommonModule,
