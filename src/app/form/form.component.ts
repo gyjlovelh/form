@@ -1,9 +1,9 @@
 /**
  * {{desc}}
  *
- * @Author: guanyj
- * @Email: 18062791691@163.com
- * @Date: 2018-12-29 11:10:34
+ * ~Author: guanyj
+ * ~Email: 18062791691@163.com
+ * ~Date: 2018-12-29 11:10:34
  */
 
 import { Component, Input, ContentChild, ContentChildren, QueryList, OnInit, AfterContentInit } from '@angular/core';
