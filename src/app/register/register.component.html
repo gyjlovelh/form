@@ -1,14 +1,14 @@
 <!--
- * ~Author: guanyj
- * ~Email: 18062791691@163.com
- * ~Date: 2019-01-02 20:46:28
- * ~LastEditTime: 2019-01-03 10:54:34
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2019-01-02 20:46:28
+ * @LastEditTime: 2019-01-09 17:37:50
  -->
 <div class="page-wrap">
     <div class="page-content-wrap">
         <hs-form [rules]="rules" [data]="data">
 
-
+            <nz-tabset [nzSelectedIndex]="1"></nz-tabset>
             <ng-template hsFormLabelTemplate field="nickname">
                 <span>Nickname<i nz-icon nz-tooltip nzTitle="What do you want other to call you" type="question-circle" theme="outline"></i></span>
             </ng-template>
@@ -21,8 +21,9 @@
                             <nz-option nzLabel="+87" nzValue="1"></nz-option>
                         </nz-select>
                     </ng-template>
-                    <input nz-input required [(ngModel)]="control.value" name="phone" #nm="ngModel">
+                    <input hsFormControlName="phoneNext" [rules]="rules" nz-input name="phone" >
                 </nz-input-group>
+                <!-- <p *ngIf="nm.dirty && nm.invalid" (click)="cos(nm)">{{control.getErrorMsg('required')}}</p> -->
             </ng-template>
 
             <ng-template hsFormFooterTemplate>

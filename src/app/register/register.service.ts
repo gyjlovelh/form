@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HsFormGroup, HsFormControl } from 'public_api';
-import { Validators } from '@angular/forms';
+import { Validators, FormArray, FormControl } from '@angular/forms';
+import { HsFormControl } from 'app/form/hs-form-control';
+import { HsFormGroup } from 'app/form/hs-form-group';
 
 @Injectable()
 export class RegisterService {
@@ -27,7 +28,8 @@ export class RegisterService {
         const control = new HsFormControl();
         control.label = 'E-mail';
         control.required = true;
-        control.setValidators([Validators.email]);
+        control.setValidators([Validators.required, Validators.email]);
+        control.setErrorMsg('required', 'Please input your email!');
         control.setErrorMsg('email', 'The input is not valid E-mail!');
         return control;
     }
@@ -65,8 +67,13 @@ export class RegisterService {
         const control = new HsFormControl();
         control.label = 'Phone Number';
         control.required = true;
-        control.setValidators([Validators.required]);
+        control.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
         control.setErrorMsg('required', 'Please input your phone number!');
+        const arr = new FormArray([
+            new FormControl('phonePrev', [Validators.required]),
+            new FormControl('phoneNext', [Validators.required, Validators.minLength(3)])
+        ]);
+
         return control;
     }
 
@@ -84,6 +91,8 @@ export class RegisterService {
         const control = new HsFormControl();
         control.label = 'Captcha';
         control.required = true;
+        control.setValidators([Validators.required]);
+        control.setErrorMsg('required', 'Please input captcha!');
         control.extra = 'We must make sure that your are a human.';
         return control;
     }

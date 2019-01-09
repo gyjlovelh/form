@@ -1,9 +1,9 @@
 /**
  * {{desc}}
  *
- * ~Author: guanyj
- * ~Email: 18062791691@163.com
- * ~Date: 2018-12-29 11:10:34
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2018-12-29 11:10:34
  */
 
 import { Component, Input, ContentChild, ContentChildren, QueryList, OnInit, AfterContentInit } from '@angular/core';
@@ -30,7 +30,7 @@ export class FormComponent implements OnInit, AfterContentInit {
     /**
      * 自定义按钮
      */
-    footerTemplateRef: QueryList<FormFooterTemplateDirective>;
+    footerTemplateRef: FormFooterTemplateDirective;
     controlTemplateRefs: QueryList<FormControlTemplateDirective>;
     labelTemplateRefs: QueryList<FormLabelTemplateDirective>;
     extraTemplateRefs: QueryList<FormExtraTemplateDirective>;
@@ -82,6 +82,7 @@ export class FormComponent implements OnInit, AfterContentInit {
         this.controlTemplateRefs.forEach(directive => {
             const control = <HsFormControl>this.rules.get(directive.field);
             control.type = 'template';
+            console.log(directive);
             control.controlTemplate = directive.template;
         });
 

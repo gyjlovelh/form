@@ -11,8 +11,10 @@ import { RegisterService } from './register.service';
 export class RegisterComponent implements OnInit {
 
     rules: HsFormGroup;
-
-    data = {};
+    
+    data = {
+        name: 'zhangsan'
+    };
 
     constructor(
         private $formService: RegisterService
@@ -24,6 +26,10 @@ export class RegisterComponent implements OnInit {
 
     handleRegister() {
         console.log(this.rules);
+    }
+
+    cos(nm) {
+        console.log(nm);
     }
 
 }

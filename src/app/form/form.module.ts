@@ -1,10 +1,10 @@
 /**
  * FormModule
  *
- * ~Author: guanyj
- * ~Email: 18062791691@163.com
- * ~Date: 2018-12-29 08:57:43
- * ~LastEditTime: 2018-12-30 13:58:55
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2018-12-29 08:57:43
+ * @LastEditTime: 2018-12-30 13:58:55
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,7 @@ import { FormLabelTemplateDirective } from './form-label-template.directive';
 import { FormExtraTemplateDirective } from './form-extra-template.directive';
 import { LayoutPipe } from './layout.pipe';
 import { FormExplainTemplateDirective } from './form-explain-template.directive';
+import { FormControlNameDirective } from './form-control-name.directive';
 @NgModule({
     imports: [
         CommonModule,
@@ -33,6 +34,7 @@ import { FormExplainTemplateDirective } from './form-explain-template.directive'
         FormLabelTemplateDirective,
         FormExtraTemplateDirective,
         FormExplainTemplateDirective,
+        FormControlNameDirective,
         LayoutPipe
     ],
     entryComponents: [],
@@ -42,7 +44,8 @@ import { FormExplainTemplateDirective } from './form-explain-template.directive'
         FormControlTemplateDirective,
         FormLabelTemplateDirective,
         FormExtraTemplateDirective,
-        FormExplainTemplateDirective
+        FormExplainTemplateDirective,
+        FormControlNameDirective
     ],
 })
 export class FormModule {

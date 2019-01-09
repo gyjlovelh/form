@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HsFormGroup } from '../form/hs-form-group';
 import { DynamicService } from './dynamic.service';
 import { HsFormControl } from '../form/hs-form-control';
+import { NzTabSetComponent, NzTabChangeEvent } from 'ng-zorro-antd';
 
 @Component({
     selector: 'hs-dynamic',
@@ -16,6 +17,7 @@ export class DynamicComponent implements OnInit {
     data = {};
 
     @ViewChild('control') controlTemplate: TemplateRef<any>;
+    @ViewChild(NzTabSetComponent) tabset: NzTabSetComponent;
 
     constructor(
         private $formService: DynamicService
