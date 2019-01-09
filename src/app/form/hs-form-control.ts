@@ -155,8 +155,8 @@ export class HsFormControl extends FormControl {
 
     private errorMap = new Map<string, string>();
 
-    constructor() {
-        super();
+    constructor(updateOn: 'change' | 'blur' | 'submit' = 'change') {
+        super(null, {updateOn});
         this.transform = value => value;
         this.feedback = false;
         this.required = false;

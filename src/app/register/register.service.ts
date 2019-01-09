@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Validators, FormArray, FormControl } from '@angular/forms';
-import { HsFormControl } from 'app/form/hs-form-control';
-import { HsFormGroup } from 'app/form/hs-form-group';
+import {Validators, FormControl, FormGroup} from '@angular/forms';
+import { HsFormControl } from '../form/hs-form-control';
+import { HsFormGroup } from '../form/hs-form-group';
 
 @Injectable()
 export class RegisterService {
@@ -11,11 +11,13 @@ export class RegisterService {
     constructor() { }
 
     initFormRules() {
-        this.fg.addControl('email', this.initEmailControl());
+        this.fg.addControl('username', this.initUserNameControl());
         this.fg.addControl('password', this.initPasswordControl());
         this.fg.addControl('confirm', this.initConfirmControl());
         this.fg.addControl('nickname', this.initNicknameControl());
         this.fg.addControl('phone', this.initPhoneControl());
+        // TODO: 扩展对formGroup嵌套的支持
+        // this.fg.addControl('email', this.initEmailControl());
         this.fg.addControl('website', this.initWebsiteControl());
         this.fg.addControl('captcha', this.initCaptchaControl());
 
@@ -24,13 +26,12 @@ export class RegisterService {
         return this.fg;
     }
 
-    private initEmailControl() {
+    private initUserNameControl() {
         const control = new HsFormControl();
-        control.label = 'E-mail';
+        control.label = 'Username';
         control.required = true;
-        control.setValidators([Validators.required, Validators.email]);
+        control.setValidators([Validators.required]);
         control.setErrorMsg('required', 'Please input your email!');
-        control.setErrorMsg('email', 'The input is not valid E-mail!');
         return control;
     }
 
@@ -40,6 +41,9 @@ export class RegisterService {
         control.required = true;
         control.setValidators([Validators.required]);
         control.setErrorMsg('required', 'Please input your password!');
+        control.valueChanges.subscribe(() => {
+            this.fg.get('confirm').updateValueAndValidity();
+        });
         return control;
     }
 
@@ -64,16 +68,19 @@ export class RegisterService {
 
     private initPhoneControl() {
         // TODO: 自定义错误提示
-        const control = new HsFormControl();
+        const control = new HsFormControl('blur');
         control.label = 'Phone Number';
         control.required = true;
         control.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
         control.setErrorMsg('required', 'Please input your phone number!');
-        const arr = new FormArray([
-            new FormControl('phonePrev', [Validators.required]),
-            new FormControl('phoneNext', [Validators.required, Validators.minLength(3)])
-        ]);
+        control.setErrorMsg('minlength', 'minglength 3');
+        control.setErrorMsg('maxlength', 'maxlength = 10');
 
+        return control;
+    }
+
+    private initEmailControl() {
+        const control = new HsFormGroup();
         return control;
     }
 

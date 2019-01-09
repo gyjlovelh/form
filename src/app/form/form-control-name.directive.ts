@@ -6,12 +6,24 @@
  * @Date: 2019-01-03 15:22:48
  * @LastEditTime: 2019-01-09 16:41:01
  */
-import { Directive, Optional, Host, Self, Inject, forwardRef, HostListener, Input, ElementRef, Renderer2 } from '@angular/core';
+import {
+    Directive,
+    Optional,
+    Host,
+    Self,
+    Inject,
+    forwardRef,
+    HostListener,
+    Input,
+    ElementRef,
+    Renderer2
+} from '@angular/core';
 import {
     ControlContainer, NG_VALIDATORS, NG_VALUE_ACCESSOR, ControlValueAccessor
 } from '@angular/forms';
-import { HsFormGroup } from './hs-form-group';
-import { HsFormControl } from './hs-form-control';
+import {HsFormGroup} from './hs-form-group';
+import {HsFormControl} from './hs-form-control';
+import {HsFormControlStatus} from './model';
 
 @Directive({
     selector: '[hsFormControlName]',
@@ -23,11 +35,10 @@ import { HsFormControl } from './hs-form-control';
         }
     ]
 })
-export class FormControlNameDirective {
-    private _value: any;
+export class FormControlNameDirective extends HsFormControlStatus {
     private _rules: HsFormGroup;
-    private _control: HsFormControl;
     private _controlName: string;
+    private native: any;
 
     @Input() set hsFormControlName(name: string) {
         this._controlName = name;
@@ -45,26 +56,25 @@ export class FormControlNameDirective {
         @Optional() @Host() private parent: ControlContainer,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) private valueAccessors: ControlValueAccessor[]
     ) {
-
+        super();
+        this.native = this.el.nativeElement;
     }
 
     @HostListener('input', ['$event'])
-    valueChange({ target }) {
-        const { value } = target;
-        this._control.setValue(value);
-        if (this._control.errors) {
-            this.render.addClass(this.el.nativeElement, 'ng-invalid');
-        } else {
-            this.render.addClass(this.el.nativeElement, 'ng-valid');
-        }
-        console.log(this._control.errors);
-
+    valueChange({target}) {
+        const {value} = target;
+        this.control.setValue(value);
+        this.control.markAsDirty();
     }
-    // hs-form-item ng-untouched ng-pristine ng-invalid ant-input ng-star-inserted
+
+    @HostListener('focus', ['$event'])
+    focus() {
+        this.control.markAsTouched();
+    }
 
     private initControlName() {
         if (this._controlName && this._rules) {
-            this._control = <HsFormControl>this._rules.get(this._controlName);
+            this.control = <HsFormControl>this._rules.get(this._controlName);
         }
     }
 }

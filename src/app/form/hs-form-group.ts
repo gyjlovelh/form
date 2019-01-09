@@ -8,7 +8,7 @@
  * extends FormGroup
  */
 
-import {FormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup} from '@angular/forms';
 import { HsFormControl } from './hs-form-control';
 
 export type layoutType = 'horizontal' | 'vertical' | 'inline';
@@ -34,8 +34,8 @@ export class HsFormGroup extends FormGroup {
 
     controlWidth: number;
 
-    constructor() {
-        super({});
+    constructor(updateOn: 'change' | 'blur' | 'submit' = 'change') {
+        super({}, {updateOn: updateOn});
     }
 
     /**
@@ -43,9 +43,16 @@ export class HsFormGroup extends FormGroup {
      * param name
      * param control
      */
-    addControl(name: string, control: HsFormControl): void {
+    addControl(name: string, control: AbstractControl): void {
         this.controlArray.push(control);
-        control.field = name;
+        control['field'] = name;
+
+        super.addControl(name, control);
+    }
+
+    addGroup(name: string, control: HsFormGroup): void {
+        this.controlArray.push(control);
+
         super.addControl(name, control);
     }
 

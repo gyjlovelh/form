@@ -13,7 +13,7 @@
                 <ng-template #labelTemplate>{{control.label}}</ng-template>
                 <ng-container *ngTemplateOutlet="control.labelTemplate || labelTemplate; context:{$implicit: control, rules: rules, index: index}"></ng-container>
             </nz-form-label>
-            <nz-form-control [nzSpan]="(control.controlWidth || rules.controlWidth) | layout:rules.layout" [nzHasFeedback]="control.feedback" [nzValidateStatus]="control">
+            <nz-form-control [class.has-error]="control.dirty && control.errors" [nzSpan]="(control.controlWidth || rules.controlWidth) | layout:rules.layout" [nzHasFeedback]="control.feedback" [nzValidateStatus]="control">
                 <ng-container *ngIf="!(rules.readonly || control.readonly)">
                     <!-- TODO: 补全 -->
                     <ng-container [ngSwitch]="control.type">

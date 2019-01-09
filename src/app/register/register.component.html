@@ -18,12 +18,11 @@
                     <ng-template #addOnBeforeTemplate>
                         <nz-select [ngModel]="'1'" style="width: 70px;">
                             <nz-option nzLabel="+86" nzValue="1"></nz-option>
-                            <nz-option nzLabel="+87" nzValue="1"></nz-option>
+                            <nz-option nzLabel="+87" nzValue="2"></nz-option>
                         </nz-select>
                     </ng-template>
-                    <input hsFormControlName="phoneNext" [rules]="rules" nz-input name="phone" >
+                    <input hsFormControlName="phone" [rules]="rules" nz-input name="phone" >
                 </nz-input-group>
-                <!-- <p *ngIf="nm.dirty && nm.invalid" (click)="cos(nm)">{{control.getErrorMsg('required')}}</p> -->
             </ng-template>
 
             <ng-template hsFormFooterTemplate>
