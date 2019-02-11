@@ -2,7 +2,7 @@
  * @Author: guanyj
  * @Email: 18062791691@163.com
  * @Date: 2018-12-29 11:15:51
- * @LastEditTime: 2019-01-09 17:48:28
+ * @LastEditTime: 2019-02-10 21:34:28
  -->
 
 <form nz-form class="hs-form-warp" [formGroup]="rules" [nzLayout]="rules.layout">
@@ -13,7 +13,7 @@
                 <ng-template #labelTemplate>{{control.label}}</ng-template>
                 <ng-container *ngTemplateOutlet="control.labelTemplate || labelTemplate; context:{$implicit: control, rules: rules, index: index}"></ng-container>
             </nz-form-label>
-            <nz-form-control [class.has-error]="control.dirty && control.errors" [nzSpan]="(control.controlWidth || rules.controlWidth) | layout:rules.layout" [nzHasFeedback]="control.feedback" [nzValidateStatus]="control">
+            <nz-form-control [class.has-error]="control.dirty && control.errors" [nzOffset]="control.controlOffset || 0" [nzSpan]="(control.controlWidth || rules.controlWidth) | layout:rules.layout" [nzHasFeedback]="control.feedback" [nzValidateStatus]="control">
                 <ng-container *ngIf="!(rules.readonly || control.readonly)">
                     <!-- TODO: 补全 -->
                     <ng-container [ngSwitch]="control.type">
@@ -22,9 +22,38 @@
 
                         <nz-input-number *ngSwitchCase="'number'" class="hs-form-item" [formControlName]="control.field"></nz-input-number>
 
+                        <!-- Boolean -->
+                        <label *ngSwitchCase="'boolean'" [formControlName]="control.field" nz-checkbox>{{control.label}}</label>
+
+                        <!-- Dropdown -->
+                        <nz-select *ngSwitchCase="'dropdown'"
+
+                            [formControlName]="control.field">
+                            <nz-option *ngFor="let option of control.dropdown"
+                                [nzLabel]="option.label"
+                                [nzValue]="option.value"
+                                [nzDisabled]="option.disabled"
+                                [nzCustomContent]="option.customContent">
+                                {{option.customTemplate}}
+                            </nz-option>
+                        </nz-select>
                         <ng-template class="hs-form-item" *ngSwitchCase="'dropdown'"></ng-template>
 
-                        <nz-date-picker class="hs-form-item" *ngSwitchCase="'date'" nzShowTime [formControlName]="control.field"></nz-date-picker>
+                        <nz-date-picker
+                            class="hs-form-item"
+                            *ngSwitchCase="'date'"
+                            nzShowTime
+                            [nzFormat]="control.dateformat"
+                            [nzPlaceHolder]="control.placeholder"
+                            [formControlName]="control.field">
+                        </nz-date-picker>
+
+                        <textarea style="resize: none;"
+                            *ngSwitchCase="'textarea'"
+                            rows="5"
+                            nz-input
+                            [placeholder]="control.placeholder"
+                            [formControlName]="control.field"></textarea>
 
                         <ng-container *ngSwitchCase="'template'">
                             <ng-container *ngTemplateOutlet="control?.controlTemplate;context: {$implicit: control, rules: rules, index: index}"></ng-container>

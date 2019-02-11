@@ -1,0 +1,33 @@
+
+.auth-wrap {
+    border-radius: 2px;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    padding: 15px 25px;
+    background: #fff;
+    box-shadow: 0 0 10px #ccc;
+
+    .auth-header {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .auth-content {
+        font-size: 12px;
+        padding: 10px 0;
+    }
+
+    .auth-footer {
+        border-top: 1px solid #ccc;
+        padding: 10px 0 0 0;
+        button {
+            margin-right: 10px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

@@ -79,27 +79,7 @@ export class FormComponent implements OnInit, AfterContentInit {
     }
 
     ngAfterContentInit() {
-        this.controlTemplateRefs.forEach(directive => {
-            const control = <HsFormControl>this.rules.get(directive.field);
-            control.type = 'template';
-            console.log(directive);
-            control.controlTemplate = directive.template;
-        });
-
-        this.labelTemplateRefs.forEach(directive => {
-            const control = <HsFormControl>this.rules.get(directive.field);
-            control.labelTemplate = directive.template;
-        });
-
-        this.extraTemplateRefs.forEach(directive => {
-            const control = <HsFormControl>this.rules.get(directive.field);
-            control.extraTemplate = directive.template;
-        });
-
-        this.explainTemplateRefs.forEach(directive => {
-            const control = <HsFormControl>this.rules.get(directive.field);
-            control.explainTemplate = directive.template;
-        });
+        this.initTemplate();
     }
 
     private initFormStatus() {
@@ -110,5 +90,39 @@ export class FormComponent implements OnInit, AfterContentInit {
                 }
             });
         }
+    }
+
+    private initTemplate() {
+        if (!this.controlTemplateRefs) {
+            return;
+        }
+        this.controlTemplateRefs.forEach(directive => {
+            const control = <HsFormControl>this.rules.get(directive.field);
+            if (control && !control.controlTemplate) {
+                control.type = 'template';
+                control.controlTemplate = directive.template;
+            }
+        });
+
+        this.labelTemplateRefs.forEach(directive => {
+            const control = <HsFormControl>this.rules.get(directive.field);
+            if (control && !control.labelTemplate) {
+                control.labelTemplate = directive.template;
+            }
+        });
+
+        this.extraTemplateRefs.forEach(directive => {
+            const control = <HsFormControl>this.rules.get(directive.field);
+            if (control && !control.extraTemplate) {
+                control.extraTemplate = directive.template;
+            }
+        });
+
+        this.explainTemplateRefs.forEach(directive => {
+            const control = <HsFormControl>this.rules.get(directive.field);
+            if (control && !control.explainTemplate) {
+                control.explainTemplate = directive.template;
+            }
+        });
     }
 }

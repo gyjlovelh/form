@@ -4,16 +4,16 @@
  * ii,提供labelTemplate、extraTemplate、controlTemplate可自定义模板
  * iii,
  *
- * @Author: guanyj
- * @Email: 18062791691@163.com
- * @Date: 2018-12-29 10:56:49
- * @LastEditTime: 2018-12-30 13:51:27
- * @extends FormControl
+ * !Author: guanyj
+ * !Email: 18062791691@163.com
+ * !Date: 2018-12-29 10:56:49
+ * !LastEditTime: 2018-12-30 13:51:27
+ * !extends FormControl
  */
 import { FormControl } from '@angular/forms';
 import { TemplateRef } from '@angular/core';
 
-export type controlType = 'input' | 'number' | 'dropdown' | 'date' | 'textarea' | 'password' | 'template';
+export type controlType = 'input' | 'number' | 'dropdown' | 'boolean' | 'date' | 'textarea' | 'password' | 'template';
 export type visiableType = 'both' | 'readonly' | 'modify';
 const errrorCodes = [
     'required', 'min', 'max', 'maxlength', 'emial',
@@ -43,13 +43,13 @@ export class HsFormControl extends FormControl {
     /**
      * 当前control是否为只读
      *
-     * @default false
+     * !default false
      */
     readonly: boolean;
 
     /**
      * control的可见的场景，默认在查看和修改模式下都可见
-     * @usageNotes
+     * !usageNotes
      * ### 密码框只在编辑模式下可见，在查看模式下隐藏
      * ```
      *  const control = new HsFormControl();
@@ -57,16 +57,19 @@ export class HsFormControl extends FormControl {
      *  control.visiable = 'modify';
      * ```
      *
-     * @default 'both'
+     * !default 'both'
      */
     visiable: visiableType;
 
     placeholder = '';
 
+    /** 日期格式化 */
+    dateformat = 'yyyy-MM-dd hh:mm:ss';
+
     /**
      * 控制nz-form-label的宽度
      *
-     * @type {number}
+     * !type {number}
      */
     private _labelWidth: number;
     set labelWidth(w: number) {
@@ -81,7 +84,7 @@ export class HsFormControl extends FormControl {
     /**
      * 控制nz-form-control的宽度
      *
-     * @type {number}
+     * !type {number}
      */
     private _controlWidth: number;
     set controlWidth(w: number) {
@@ -94,21 +97,21 @@ export class HsFormControl extends FormControl {
 
     /**
      * 控制zorro的 nzHasFeedback 属性，展示校验状态图标
-     * @default false
+     * !default false
      */
     feedback: boolean;
 
     /**
      * 当前项是否为必填，仅影响样式(追加型号*)
      *
-     * @default false
+     * !default false
      */
     required: boolean;
 
     /**
      * 当readonly为true时，此函数保证文本的正确显示。
      *
-     * @usageNotes
+     * !usageNotes
      * ### 转换日期
      * ```
      *   const control = new HsFormControl();
@@ -123,8 +126,8 @@ export class HsFormControl extends FormControl {
 
     /**
      * 自定义模板，结合指令使用可实现扩展功能
-     * @template
-     * @private
+     * !template
+     * !private
      */
     extraTemplate: TemplateRef<any>;
     labelTemplate: TemplateRef<any>;
@@ -153,6 +156,11 @@ export class HsFormControl extends FormControl {
         return list;
     }
 
+    /**
+     * 下拉框数组
+     */
+    dropdown: Array<DropdownOption> = [];
+
     private errorMap = new Map<string, string>();
 
     constructor(updateOn: 'change' | 'blur' | 'submit' = 'change') {
@@ -166,9 +174,9 @@ export class HsFormControl extends FormControl {
     /**
      * 设置指定错误码的错误错误信息
      *
-     * @param errorCode
-     * @param errorMsg
-     * @public
+     * !param errorCode
+     * !param errorMsg
+     * !public
      */
     setErrorMsg(errorCode: string, errorMsg: string) {
         this.errorMap.set(errorCode, errorMsg);
@@ -177,7 +185,7 @@ export class HsFormControl extends FormControl {
     /**
      * 获取指定错误码的错误信息
      *
-     * @param errorCode
+     * !param errorCode
      */
     getErrorMsg(errorCode: string) {
         return this.errorMap.get(errorCode);
@@ -186,7 +194,7 @@ export class HsFormControl extends FormControl {
     /**
      * 设置缺省错误信息
      *
-     * @param errorMsg
+     * !param errorMsg
      */
     setDefaultErrorMsg(errorMsg: string) {
         errrorCodes.forEach(code => {
@@ -195,5 +203,22 @@ export class HsFormControl extends FormControl {
             }
         });
     }
+
+}
+
+/**
+ * 下拉框配置
+ */
+export class DropdownOption {
+
+    label?: string;
+
+    value: any;
+
+    disabled?: boolean;
+
+    customContent?: boolean;
+
+    customTemplate?: TemplateRef<any>;
 
 }

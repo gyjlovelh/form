@@ -12,6 +12,7 @@ import { HsFormControl } from '../form/hs-form-control';
 import { Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { AuthorizationService } from '../service/authorization.service';
 
 @Component({
     selector: 'hs-basic',
@@ -46,7 +47,8 @@ export class BasicComponent implements OnInit, AfterViewInit {
     ];
 
     constructor(
-        private $active: ActivatedRoute
+        private $active: ActivatedRoute,
+        private $auth: AuthorizationService
     ) {
 
     }
@@ -172,5 +174,12 @@ export class BasicComponent implements OnInit, AfterViewInit {
             return '123';
         };
         return control;
+    }
+
+    handleClick() {
+        this.$auth.pushMsg('admin拒绝了');
+        this.$auth.pushMsg('guanyj拒绝了');
+        this.$auth.pushMsg('qli拒绝了');
+        this.$auth.show();
     }
 }

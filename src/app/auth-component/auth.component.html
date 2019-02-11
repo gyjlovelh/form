@@ -1,0 +1,18 @@
+<!--
+ * @Author: guanyj
+ * @Email: 18062791691@163.com
+ * @Date: 2019-01-12 10:38:46
+ * @LastEditTime: 2019-01-12 10:44:03
+ -->
+
+<div *ngIf="isAuthModalShow" class="auth-wrap">
+    <h3 class="auth-header">二次授权消息</h3>
+    <div class="auth-content">
+        <p>{{currentMsg}}</p>
+    </div>
+    <div class="auth-footer">
+        <button [disabled]="prevDisabled" nz-button (click)="prev()">上一条</button>
+        <button [disabled]="nextDisabled" nz-button (click)="next()">下一条</button>
+        <button nz-button (click)="close()">关闭</button>
+    </div>
+</div>

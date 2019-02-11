@@ -15,6 +15,8 @@ import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angu
 import { IconDefinition } from '@ant-design/icons-angular';
 import { RegisterComponent } from './register/register.component';
 import { DynamicComponent } from './dynamic/dynamic.component';
+import { AuthorizationService } from './service/authorization.service';
+import { AuthComponent } from './auth-component/auth.component';
 
 const icons: IconDefinition[] = [AccountBookFill, AlertOutline, AlertFill];
 
@@ -36,7 +38,8 @@ const routes: Routes = [
         LayoutComponent,
         LoginComponent,
         RegisterComponent,
-        DynamicComponent
+        DynamicComponent,
+        AuthComponent
     ],
     imports: [
         CommonModule,
@@ -47,9 +50,11 @@ const routes: Routes = [
         NgZorroAntdModule,
         RouterModule.forRoot(routes)
     ],
+    entryComponents: [AuthComponent],
     providers: [
         { provide: NZ_I18N, useValue: zh_CN },
-        { provide: NZ_ICONS, useValue: icons }
+        { provide: NZ_ICONS, useValue: icons },
+        AuthorizationService
     ],
     bootstrap: [AppComponent]
 })

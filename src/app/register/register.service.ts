@@ -17,7 +17,7 @@ export class RegisterService {
         this.fg.addControl('nickname', this.initNicknameControl());
         this.fg.addControl('phone', this.initPhoneControl());
         // TODO: 扩展对formGroup嵌套的支持
-        // this.fg.addControl('email', this.initEmailControl());
+        // this.fg.addControl('name', this.initNameControl());
         this.fg.addControl('website', this.initWebsiteControl());
         this.fg.addControl('captcha', this.initCaptchaControl());
 
@@ -79,8 +79,11 @@ export class RegisterService {
         return control;
     }
 
-    private initEmailControl() {
+    private initNameControl() {
         const control = new HsFormGroup();
+        // control.label = '姓名';
+        control.addControl('first', new HsFormControl());
+        control.addControl('last', new HsFormControl());
         return control;
     }
 

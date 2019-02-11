@@ -2,7 +2,7 @@
  * @Author: guanyj
  * @Email: 18062791691@163.com
  * @Date: 2019-01-02 20:46:28
- * @LastEditTime: 2019-01-09 17:37:50
+ * @LastEditTime: 2019-01-11 13:46:10
  -->
 <div class="page-wrap">
     <div class="page-content-wrap">
@@ -21,9 +21,14 @@
                             <nz-option nzLabel="+87" nzValue="2"></nz-option>
                         </nz-select>
                     </ng-template>
-                    <input hsFormControlName="phone" [rules]="rules" nz-input name="phone" >
+                    <input hsFormControlName="phone" nz-input name="phone" >
                 </nz-input-group>
             </ng-template>
+
+            <!-- <ng-template hsFormControlTemplate field="name" let-control>
+                <input type="text" hsFormControlName="first" nz-input> -
+                <input type="text" hsFormControlName="last" nz-input>
+            </ng-template> -->
 
             <ng-template hsFormFooterTemplate>
                 <label nz-checkbox>

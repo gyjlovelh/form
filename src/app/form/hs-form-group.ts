@@ -43,16 +43,28 @@ export class HsFormGroup extends FormGroup {
      * param name
      * param control
      */
-    addControl(name: string, control: AbstractControl): void {
-        this.controlArray.push(control);
-        control['field'] = name;
-
-        super.addControl(name, control);
-    }
-
-    addGroup(name: string, control: HsFormGroup): void {
-        this.controlArray.push(control);
-
+    addControl(name: string, control: HsFormControl | HsFormGroup, position?: {after?: string, before?: string}): void {
+        if (control instanceof HsFormControl) {
+            if (position) {
+                if (position.after) {
+                    const index = this.controlArray.findIndex(item => item.field === position.after);
+                    if (index !== -1) {
+                        this.controlArray.splice(index + 1, 0, control);
+                    }
+                } else if (position.before) {
+                    const index = this.controlArray.findIndex(item => item.field === position.after);
+                    if (index !== -1) {
+                        this.controlArray.splice(index, 0, control);
+                    }
+                } else {}
+            } else {
+                this.controlArray.push(control);
+            }
+            control.field = name;
+        } else {
+            this.controlArray.push(control);
+            this.controlArray.push(...control.controlArray);
+        }
         super.addControl(name, control);
     }
 
